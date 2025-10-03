@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import white from "../../assets/white.png";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../store/store";
-import { fetchProducts } from "../../store/slices/productSlice";
 import { Link } from "react-router-dom";
 import SearchProduct from "../../components/SearchProduct/SearchProduct";
+import { useGetProductsQuery } from "../../store/slices/productsApi";
 
 const Products: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { product, loading, error } = useSelector(
-    (state: RootState) => state.products
-  );
-
   // 🔎 Local state for search term
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+  const { data: products = [], isLoading, error } = useGetProductsQuery();
 
-  if (loading) return <div className="text-center">Loading...</div>;
-  if (error) return <div className="text-center text-red-500">{error}</div>;
+  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (error)
+    return (
+      <div className="text-center text-red-500">Failed to load products</div>
+    );
 
   // 🔎 Filter products by title (case insensitive)
-  const filteredProducts = product.filter((item) =>
+  const filteredProducts = products.filter((item) =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -44,6 +38,7 @@ const Products: React.FC = () => {
                 alt={item.title}
                 className="p-4 rounded"
                 style={{ backgroundColor: "hsl(120deg 6.67% 97.06%)" }}
+                loading="lazy"
               />
               <div className="p-3 text-left">
                 <Link

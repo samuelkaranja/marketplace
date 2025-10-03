@@ -1,32 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import type { AppDispatch, RootState } from "../../store/store";
-import {
-  clearSelectedProduct,
-  fetchProductById,
-} from "../../store/slices/productSlice";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import { useGetProductByIdQuery } from "../../store/slices/productsApi";
 
 const Details: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch<AppDispatch>();
-  const { selectedProduct, loading, error } = useSelector(
-    (state: RootState) => state.products
-  );
+  const {
+    data: selectedProduct,
+    error,
+    isLoading,
+  } = useGetProductByIdQuery(id!);
 
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchProductById(id));
-    }
-
-    return () => {
-      dispatch(clearSelectedProduct()); // cleanup when leaving page
-    };
-  }, [dispatch, id]);
-
-  if (loading) return <p className="text-center text-3xl mt-30">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (isLoading)
+    return <p className="text-center text-3xl mt-30">Loading...</p>;
+  if (error)
+    return <p className="text-center text-red-500">Failed to fetch product</p>;
   if (!selectedProduct) return <p className="text-center">No product found</p>;
 
   return (
@@ -39,6 +27,7 @@ const Details: React.FC = () => {
             src={selectedProduct?.thumbnail}
             alt="Product"
             className="w-80 h-80 object-cover cursor-pointer mx-auto"
+            loading="lazy"
           />
           {/* Thumbnails (grid) */}
           <div className="grid grid-cols-4 gap-2 mt-4 justify-center">
@@ -47,6 +36,7 @@ const Details: React.FC = () => {
                 key={index}
                 src={img}
                 className="rounded-md shadow-md cursor-pointer"
+                loading="lazy"
               />
             ))}
           </div>
