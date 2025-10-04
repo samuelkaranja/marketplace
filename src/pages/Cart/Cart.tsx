@@ -61,7 +61,7 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#e5e6ea]">
+    <div className="min-h-screen bg-[#eeefe9]">
       <div className="flex flex-col md:flex-row gap-8 p-6">
         {/* Cart Items Section */}
         <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
