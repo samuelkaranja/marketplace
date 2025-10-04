@@ -6,13 +6,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav
-      className="w-full shadow-md"
-      style={{
-        backgroundColor: "hsl(21.82deg 34.74% 62.75%)",
-        color: "white",
-      }}
-    >
+    <nav className="w-full shadow-md text-[#333] bg-[#eeefe9] border-b border-gray-300">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link to="/" className="text-2xl underline cursor-pointer">
