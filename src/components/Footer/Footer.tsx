@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-gray-200">
+    <footer className="border-t border-gray-300 bg-[#eeefe9]">
       <div className="max-w-7xl mx-auto px-6 py-8 text-xs text-gray-500 flex items-center justify-between">
         <div>
           <a className="underline">Terms & Conditions</a>
