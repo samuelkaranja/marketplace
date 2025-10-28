@@ -1,7 +1,17 @@
 import React from "react";
 
-const Button: React.FC = ({ children }) => {
-  return <button className="btn">{children}</button>;
+type ButtonProps = {
+  children?: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+};
+
+const Button: React.FC<ButtonProps> = ({ children, onClick, className }) => {
+  return (
+    <button onClick={onClick} className={`btn ${className ?? ""}`}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

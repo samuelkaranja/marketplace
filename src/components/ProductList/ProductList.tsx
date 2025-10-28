@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useGetProductsQuery } from "../../store/slices/productsApi";
 import ProductCard from "../ProductCard/ProductCard";
-//import SearchProduct from "../SearchProduct/SearchProduct";
 import Filter from "../Filter/Filter";
 
 const ProductList: React.FC = () => {
   // 🔎 Local state for search term
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   const { data: products = [], isLoading, error } = useGetProductsQuery();
 
@@ -22,7 +21,6 @@ const ProductList: React.FC = () => {
 
   return (
     <>
-      {/* <SearchProduct onSearch={setSearchQuery} /> */}
       <Filter />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 p-4">
         {filteredProducts.length > 0 ? (
