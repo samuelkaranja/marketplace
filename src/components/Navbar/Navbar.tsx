@@ -15,12 +15,12 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-4">
-          <a
-            href="#login"
+          <Link
+            to="/login"
             className="px-3 border-l border-white first:border-l-0 text-sm"
           >
             Login
-          </a>
+          </Link>
           <a href="#help" className="px-3 border-l border-white text-sm">
             Help
           </a>
