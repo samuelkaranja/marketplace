@@ -23,11 +23,11 @@ const ProductCard: React.FC<ProductProps> = ({ item }) => {
         <div className="mt-2 text-sm text-gray-700 text-left">
           <Link
             to={`/product-details/${item.id}`}
-            className="mt-4 text-md tracking-wide text-gray-800 font-semibold hover:underline"
+            className="mt-4 text-[16px] tracking-wide text-gray-800 font-semibold hover:underline"
           >
             {item.title}
           </Link>
-          <p className="text-gray-500 text-[14px]">${item.price}</p>
+          <p className="text-[#333] text-[15px] mt-1">Price: ${item.price}</p>
         </div>
       </div>
     </section>
