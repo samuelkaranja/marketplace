@@ -14,7 +14,7 @@ export const productsApi = createApi({
     baseUrl: "https://dummyjson.com/",
   }),
   endpoints: (builder) => ({
-    // 🆕 Paginated fetch
+    // Paginated fetch
     getProducts: builder.query<
       PaginatedResponse,
       { limit: number; skip: number }
@@ -22,11 +22,23 @@ export const productsApi = createApi({
       query: ({ limit, skip }) => `products?limit=${limit}&skip=${skip}`,
     }),
 
-    // Fetch single product by ID
+    // 🆕 Fetch products by category
+    getProductsByCategory: builder.query<
+      PaginatedResponse,
+      { category: string; limit: number; skip: number }
+    >({
+      query: ({ category, limit, skip }) =>
+        `products/category/${category}?limit=${limit}&skip=${skip}`,
+    }),
+
     getProductById: builder.query<Product, string>({
       query: (id) => `products/${id}`,
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery } = productsApi;
+export const {
+  useGetProductsQuery,
+  useGetProductsByCategoryQuery,
+  useGetProductByIdQuery,
+} = productsApi;
