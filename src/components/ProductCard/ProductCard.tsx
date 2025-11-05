@@ -9,7 +9,7 @@ type ProductProps = {
 
 const ProductCard: React.FC<ProductProps> = ({ item }) => {
   return (
-    <section className="px-4">
+    <section className="px-3 py-2">
       <div className="w-auto cursor-pointer bg-transparent" key={item.id}>
         <div className="border border-transparent">
           <img
